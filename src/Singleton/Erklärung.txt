@@ -1,0 +1,1 @@
+Das Singleton Entwurfsmuster sorgt dafür, dass es von einer Klasse nur eine einzige Instanz gibt und diese GLOBAL zugänglich ist.

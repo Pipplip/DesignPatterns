@@ -1,0 +1,131 @@
+Begriffe:
+- Abstraktion
+
+- Kapselung: Siehe StrategyPattern_2. Dort wurden die bellen und laufen gekapselt.
+  Objekteigenschaften werden als private deklariert, damit sie nicht von außen sichtbar sind.
+
+- Polymorphismus: (Vielgestaltigkeit). Gemeinsame Oberklasse von Objekten.
+  Bsp: Auto a = new Audi(); Auto b = new BMW();
+  
+- Vererbung
+
+- Komposition (Beziehungen zwischen Objekten = Assoziation)
+  es gibt 2 Assoziationen: Aggregation und Komposition
+  Aggregation: Ein Objekt von mehreren zusammengesetzten Objekten
+  Bsp: Beziehung zwischen Mannschaft und Spieler. Ein Spieler kann in mehreren Mannschaften spielen. Wird eine Mannschaft aufgelöst,
+  bedeutet dies nicht das Ende des Spielers
+  
+  Komposition: Ein Teil kann nur in einem zusammengesetzten Objekt enthalten sein.
+  Wenn es ein Objekt nicht mehr gibt, existieren seine Komponenten auch nicht mehr.
+  Bsp: Beziehung zwischen einer Bestellung und den einzelnen Posten der Bestellung.
+  Löscht man die Bestellung, löscht man auch die Posten
+  
+---------------------------------
+Typen:
+Creational Patterns (Erzeugung):
+	(kurz: beinhalten die Instantiierung von Objekten; sie alle bieten einen Weg, einen Client von den Objekten zu entkoppeln,
+	die er intantiieren muss)
+	Diese Entwurfsmuster bieten eine Möglichkeit, Objekte zu erstellen und dabei die Erstellungslogik zu verbergen, 
+	anstatt Objekte direkt mit einem neuen Operator zu instanziieren. 
+	Dies gibt dem Programm mehr Flexibilität bei der Entscheidung, 
+	welche Objekte für einen bestimmten Anwendungsfall erstellt werden müssen.
+	Bsp: (Abstract) Factory, Prototype, Builder, Singleton
+	
+Structural Patterns (Struktur):
+	(kurz: ermöglichen die Zusammensetzung von Klassen und Objekten zu größeren Strukturen)
+	Diese Entwurfsmuster betreffen die Klassen- und Objektkomposition. 
+	Das Konzept der Vererbung wird verwendet, um Schnittstellen zu komponieren und Wege zur 
+	Komposition von Objekten zu definieren, um neue Funktionalitäten zu erhalten.
+	Bsp: Adapter, Facade, Proxy, Decorator, Composite, Flyweight, Bridge, DAO
+	
+Behavioral Pattens (Verhalten):
+	(kurz: haben alle damit zu tun, wie Klassen und Objekte miteinander in Wechselwirkung stehen und Zuständigkeiten untereinander
+	aufteilen)
+	Diese Entwurfsmuster befassen sich speziell mit der Kommunikation zwischen Objekten.
+	Bsp: Command, Visitor, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, chain of responsibility, template
+	
+J2EE Patterns:
+	Diese Entwurfsmuster beziehen sich speziell auf die Präsentationsebene. Diese Muster werden vom Sun Java Center identifiziert.
+	
+Alternative Aufteilung:
+Klassenmuster: beschreiben, wie Beziehungen zwischen Klassen über Vererbung definiert sind.
+Beziehungen zu diesen Klassen werden zur Kompilierzeit hergestellt.
+Bsp: Template, Factory, Adapter, Interpreter
+
+Objektmuster: beschreiben Beziehungen zwischen Objekten und sind in erster Linie durch Komposition definiert.
+Die Beziehungen werden hier in der Regel erst zur Laufzeit hergestellt und sind dynamischer und flexibler.
+Bsp: alle anderen inklusive Abstract Factory
+
+---------------------------------
+
+Grundregeln:
+
+1) gestalte Entwürfe so, dass Änderungen minimale Auswirkungen auf bestehenden Code hat (Änderungsstabilität)
+"Identifiziere jene Aspekte, die sich ändern und trenne sie von jenen, die konstant bleiben." (Mach aus Eigenschaften eigene Klassen)
+Frage: Was ist flexibel/variabel? Ziehe es aus der Klasse und mache ein Interface daraus.
+Bsp: Verhalten bellen und laufen sind flexibel und der Rest der Hundklasse ist konstant.
+D.h. Man zieht das Verhalten des Hundes in ein neues Interface
+
+2) Programmiere auf Schnittstellen, nie auf Implementierungen
+
+3) Offen/Geschlossen-Prinzip (z.B. Decorator(umhüllen))
+Entwürfe sollen für Erweiterungen offen, aber für Veränderungen geschlossen sein
+D.h. Erweiterungen (Verhalten) müssen ohne Änderungen an bestehenden Code in das System integriert werden können
+
+4) Dependency Inversion: Stütze dich nie auf eine konkrete Klasse, sondern immer auf Abstraktion - und das beidseitig.
+z.B. abstracte Factory
+Erweiterung zu 2)
+Bsp: FactoryPattern_2 SoftwareShop kennt nur Abstraktion OfficeProgramm und ist somit zu den konkreten Klassen entkoppelt
+Auch die konkreten Klassen sind nur von der Abstraktion OfficeProgramm abhängig. Deshalb beidseitige Abstraktion
+Entkopplung: Client muss nichts von den konkreten Klassen wissen und kann zur Laufzeit geändert werden.
+
+5) Ziehe eine Komposition der Vererbung vor. (Entkopplung von Klassen) Bsp: FactoryPattern/abstract FactoryPattern
+
+
+
+---------------------------------
+
+Wichtige Pattern:
+1) Strategy
+2) Observer
+3) Decorator
+4) (abstract) Factory
+5) Singleton
+6) Command
+7) Adapter
+8) Facade
+9) Template
+10) iterator/composite
+11) state
+12) proxy
+
+
+Unterschied abstract Factory und einfacher Factory:
+Gemeinsamkeit: Beide Pattern entkoppelt den Client von konkreten Typen. 
+Der Client kennt nur die Schnittstelle zur Factory und den Produkten. 
+Welche Produkte konkret erstellt werden, entscheidet die Unterklasse/Implementierung der Schnittstelle. 
+Der Client stützt sich allein auf Abstraktion.
+
+Abstract:
+    - Ganze Produktfamilie wird erstellt.
+    - Breite Schnittstelle
+    - Schnittstelle (Abstract Factory) ist oft nur ein Interface und enthält keinen Implementierungscode.
+    - Benutzt Factory Methods, aber ohne generischen Code.
+    
+Einfache Factory:
+    - Ein Produkt(typ) wird erstellt.
+    - Schmale Schnittstelle
+    - Schnittstelle ist oft abstrakt und enthält generischen Code (Herstellungscode, den alle Produkte durchlaufen müssen)
+    
+--------------------------
+Exkurs: Interface Objekte:
+Man kann nie ein Interface instantiieren, jedoch ein Objekt, welches das Interface implementiert.
+Bsp:
+
+public interface A{}
+public class B implements A{}
+public static void main(String[] args){
+    A test = new B();
+    //A test = new A(); // wont compile
+}
+

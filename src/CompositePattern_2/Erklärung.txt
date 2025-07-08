@@ -1,0 +1,40 @@
+Das Composite Entwurfsmuster ermöglicht es, eine verschachtelte (Baum)Struktur einheitlich zu behandeln, 
+unabhängig davon, ob es sich um ein atomares Element oder um ein Behälter für weitere Elemente handelt. 
+Der Client kann elegant mit der Struktur arbeiten
+
+Bsp:
+Wir wollen eine Mitarbeiterstruktur einer Firma modellieren.
+Wurzel ist der Vorstand und die Blätter sind einfache Mitarbeiter.
+Jeder Mitarbeiter besitzt einen Namen und eine Telefonnummer und jeder Abteilungsleiter soll den Namen seiner Abteilung kennen.
+Operationen um Mitarbeiter zu holen, entfernen sollen eingebaut sein.
+Jeder Abteilungsleiter soll die Anzahl seiner Mitarbeiter kennen.
+Gesamte Hierarchie soll ausgedruckt werden können.
+
+Naiver Versuch:
+Klasse Abteilungsleiter erbt von Klasse Mitarbieter.
+Problem Redundanz für z.B. Name getName etc.
+Und man braucht immer eine Fallunterscheidung, ob Abteilungsleiter oder Mitarbeiter
+Komplexe Ausgabe aller Mitarbeiter.
+
+Regel: Stütze dich auf Abstraktion, nicht auf konkrete Klasse
+
+
+
+    Einfache Bedienung. Der Client kann Operationen, die die gesamte komplexe Hierarchie betreffen, 
+    nur mit einem einzigen Aufruf anstoßen (print(), getMitarbeiterAnzahl()). 
+    Die Struktur kümmert sich rekursiv selbst um die korrekte Abarbeitung der Operation.
+    
+    Einheitliche Bedienung und Allgemeingültigkeit. 
+    Dabei ist es dem Client gleich, ob er nun seine Operationen auf einen normalen Mitarbeiter oder 
+    einem Abteilungsleiter ausführt, er arbeitet allein geben die Schnittstelle (print(), getMitarbeiterAnzahl(), getName(), 
+    getTelefonNr()). Die konkreten Klassen hinter der Schnittstelle kapseln die Logik, um die Operation korrekt 
+    auszuführen (beispielsweise durch Delegation an Untermitarbeiter). 
+    Damit ist der Client von dieser Logik befreit, muss keine Fallunterscheidung mehr zwischen den Typen machen und 
+    kann folglich schlanken, allgemeingültigen Code schreiben. 
+    Der Gedanke der Allgemeingültigkeit gilt natürlich genauso für den Abteilungsleiter, der ebenso nur auf der
+    gemeinsamen Schnittstelle arbeitet.
+    
+    Erweiterbarkeit. Die bestehenden Typen in der Hierarchie (AtomarerMitarbeiter, Abteilungsleiter) 
+    können sehr einfach um weitere Typen/Klassen erweitert werden (z. B. Fachgruppenleiter, Vorstand). 
+    Dazu muss dieser neue Typ lediglich die gemeinsame Schnittstelle Mitarbeiter implementieren und kann 
+    fortan in der Struktur eingesetzt werden. Dabei bricht kein Code - jeder beim Abteilungsleiter noch beim Client.

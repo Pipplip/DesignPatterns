@@ -1,0 +1,29 @@
+Strategy pattern ermöglicht einer Klasse das flexible Wechseln von alternativen Verhalten.
+
+Beispiel:
+Es sollen verschiedene Hunde modelliert werden. Jeder Hund soll bellen und laufen können.
+Erste Idee:
+abstracte Hund Klasse mit Methoden bellen und laufen.
+Die abgeleiteten Klassen erben davon und überschreiben die Methoden.
+Nachteile:
+- bellen und laufen werden immer vererbt und müssen implementiert werden, auch in Kindklassen, die diese nicht brauchen.
+- Redundanz: gleiches Bellverhalten bei mehreren Kindklassen möglich (hoher Wartungsaufwand)
+- Verhalten der Hunde lässt sich nicht zur Laufzeit verändern.
+- Wiederverwendbarkeit: bestehendes Verhalten kann nicht wiederverwendet werden, wenn z.B. eine neue Kindklasse angelegt wird
+
+Anwendung der ersten Grundregel (Änderungsstabilität):
+Verhalten bellen und laufen sind felxibel und der Rest der Hundklasse ist konstant.
+D.h. Man zieht das Verhalten des Hundes in ein neues Interface
+
+interface Bellverhalten mit Methode bellen()
+Klassen die das Interface implementieren sind z.B. LautBellen implements Bellverhalten
+
+Danach:
+- Neue Hundeklassen können erstellt werden ohne die Hunde-Klasse ableiten zu müssen
+- Hund ist von seinem Verhalten entkoppelt, kennt nur noch die Schnittstelle dazu
+- keine Redundanz
+- Verhalten kann zur Laufzeit geändert werden
+- andere Klassen außer Hunde können die Verhalten erben, z.B. Katzen etc.
+
+Mit Eigenschaften funktioniert das Strategy Pattern.
+Mit anderen Objekten besser Command Pattern.

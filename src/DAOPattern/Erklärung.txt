@@ -1,0 +1,8 @@
+Data Access Object (DAO, englisch für Datenzugriffsobjekt) ist ein Entwurfsmuster, 
+das den Zugriff auf unterschiedliche Arten von Datenquellen 
+(z. B. Datenbanken, Dateisystem) so kapselt, dass die angesprochene Datenquelle ausgetauscht werden kann, 
+ohne dass der aufrufende Code geändert werden muss. Dadurch soll die eigentliche Programmlogik von 
+technischen Details der Datenspeicherung befreit werden und flexibler einsetzbar sein. DAO ist also 
+ein Muster für die Gestaltung von Programmierschnittstellen (APIs). 
+Wenn eine Programmiersprache keine Trennung von Schnittstellendefinition und -Implementierung ermöglicht, 
+muss ein DAO die definierte Schnittstelle unmittelbar implementieren. 

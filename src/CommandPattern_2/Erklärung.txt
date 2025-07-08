@@ -1,0 +1,20 @@
+Das Command Design Pattern ermöglicht die Modularisierung von Befehlen und Aufrufen. 
+Auf elegante Weise können Befehle rückgängig gemacht, protokolliert oder in einer Warteschlange gelegt werden.
+Mit Eigenschaften funktioniert das Strategy Pattern.
+Mit anderen Objekten besser Command Pattern.
+
+Bsp:
+Mitarbeiter sollen modelliert werden, welchen Drucker sie verwenden sollen.
+Erste Idee: Die Klasse des bestimmten Mitarbeiters hat eine Referenz auf ein bestimmtes Drucker-Objekt.
+Problem: Wenn mehr spezielle Drucker und Mitarbeiter hinzukommen, ist man nicht flexibel. 
+D.h. zur Laufzeit lassen sich die Drucker nicht ändern. Mitarbeiter und Drucker sind fest miteinander verbunden.
+Außerdem hat man Codeverdopplung. Jeder neue spezielle Mitarbeiter muss Methoden des angepasst werden.
+
+Im Strategy Pattern würde man eine Druckerschnittstelle einführen.
+Aber: Beim Drucker handelt es sich nicht um ein Verhalten, sondern ein Objekt an dem der Mitarbeiter seine Nachricht sendet.
+Und jeder Drucker muss anders behandelt werden.
+
+Lösung: Eine Schicht zwischen Mitarbeiter und Drucker: Druckbefehl!
+Dieser kapselt seinen Zieldrucker und weiß welche Schritte notwendig sind.
+D.h. der Befehl kennt seinen Empfänger (Drucker) und die durchführenden Schritte.
+Der Mitarbeiter muss nur den druck Befehl anstoßen und muss sich um nichts anderes kümmern.
